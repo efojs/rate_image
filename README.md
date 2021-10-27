@@ -6,7 +6,11 @@ Experiments with RAW images show that:
  - [skewness](https://en.wikipedia.org/wiki/Skewness) less than `-1` reliably indicates too bright images and   
  - larger than `1` reliably indicates too dark images.  
 
-Both are not affected by 'salt-like' noise
+Both are not affected by 'salt-like' noise  
+
+## Compensate very dark or light images
+Image can have `skew == 0` but all pixels under `100` or over `50000` (for 16 bits)  
+Method `extend_range_to_max()` adds 2 pixels — `0` and maximum possible value to compensate bias
 
 # Solution
 ```python
