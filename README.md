@@ -15,8 +15,12 @@ Method `extend_range_to_max()` adds 2 pixels — `0` and maximum possible value 
 # Solution
 ```python
 # solution.py
-def rate_image(raw_image):
+def rate_image(raw_image, max=None):
     flat = raw_image[::2,::2].flatten(order='C')
+    if not max:
+        max = get_max(flat.dtype)
+    flat = extend_range_to_max(flat, max)
+    
     skew = pd.Series(flat).skew()
     if skew < -1:
         return 'Overlight'
